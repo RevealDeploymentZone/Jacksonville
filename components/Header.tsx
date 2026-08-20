@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Phone, Menu, X, ChevronDown } from "lucide-react";
 import { BUSINESS, SERVICES } from "@/data/business";
 
@@ -35,22 +36,15 @@ export default function Header() {
       <div className="container-content">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 shrink-0">
-            <div
-              className="w-10 h-10 rounded-lg flex items-center justify-center text-white font-bold text-lg"
-              style={{ background: "#0B5563" }}
-              aria-hidden="true"
-            >
-              AL
-            </div>
-            <div>
-              <div className="font-bold text-sm leading-tight" style={{ color: "#0F172A" }}>
-                AL Air Duct Cleaning
-              </div>
-              <div className="text-xs" style={{ color: "#475569" }}>
-                Jacksonville, FL
-              </div>
-            </div>
+          <Link href="/" className="flex items-center shrink-0">
+            <Image
+              src="/logo.png"
+              alt="AL Air Duct Cleaning Jacksonville"
+              width={160}
+              height={64}
+              className="h-12 w-auto md:h-16 object-contain"
+              priority
+            />
           </Link>
 
           {/* Desktop nav */}

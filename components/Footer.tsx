@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Phone, Mail, MapPin, Clock, Share2, Star } from "lucide-react";
 import { BUSINESS, SERVICES, AREA_CITIES } from "@/data/business";
 
@@ -23,17 +24,14 @@ export default function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
           {/* Column 1 — Brand */}
           <div>
-            <Link href="/" className="flex items-center gap-3 mb-4">
-              <div
-                className="w-10 h-10 rounded-lg flex items-center justify-center text-white font-bold text-lg"
-                style={{ background: "#0B5563" }}
-              >
-                AL
-              </div>
-              <div>
-                <div className="font-bold text-sm leading-tight text-white">AL Air Duct Cleaning</div>
-                <div className="text-xs text-[#94a3b8]">Jacksonville, FL</div>
-              </div>
+            <Link href="/" className="flex items-center mb-4">
+              <Image
+                src="/logo.png"
+                alt="AL Air Duct Cleaning Jacksonville"
+                width={140}
+                height={56}
+                className="h-14 w-auto object-contain"
+              />
             </Link>
             <p className="text-sm leading-relaxed mb-4">
               Professional air duct and HVAC cleaning across Duval, St. Johns, Clay and Nassau counties. Available 24 hours a day, seven days a week.

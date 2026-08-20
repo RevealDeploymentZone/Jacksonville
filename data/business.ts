@@ -3,7 +3,7 @@ export const BUSINESS = {
   legalName: "[[LEGAL ENTITY NAME]]", // TODO: fill in legal entity name
   phone: "[[PHONE — (904) XXX-XXXX]]", // TODO: fill in phone number
   phoneRaw: "[[+1904XXXXXXX]]", // TODO: fill in raw phone number
-  email: "[[EMAIL]]", // TODO: fill in email address
+  email: "jacksonville@alairductcleaning.com",
   streetAddress: "[[STREET or omit if service-area business]]", // TODO: fill in or remove if service-area only
   city: "Jacksonville",
   state: "FL",
