@@ -1,0 +1,241 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #0B5563;
+  --color-accent: #F26522;
+  --color-neutral-text: #0F172A;
+  --color-neutral-body: #475569;
+  --color-neutral-bg: #F8FAFC;
+  --color-success: #16A34A;
+  --font-family-sans: "Inter", system-ui, sans-serif;
+}
+
+:root {
+  --font-inter: "Inter", system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: #0F172A;
+  background: #ffffff;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  color: #0F172A;
+  line-height: 1.2;
+}
+
+p {
+  color: #475569;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: #F26522;
+  color: white;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  transition: background-color 0.2s;
+  font-size: 1rem;
+  min-height: 48px;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+}
+.btn-primary:hover { background-color: #d4571d; }
+.btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: #0B5563;
+  color: white;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  transition: background-color 0.2s;
+  font-size: 1rem;
+  min-height: 48px;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+}
+.btn-secondary:hover { background-color: #094a57; }
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: 2px solid #0B5563;
+  color: #0B5563;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  transition: all 0.2s;
+  font-size: 1rem;
+  min-height: 48px;
+  text-decoration: none;
+  background: transparent;
+  cursor: pointer;
+}
+.btn-outline:hover { background-color: #0B5563; color: white; }
+
+.card {
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #E2E8F0;
+  padding: 1.5rem;
+  transition: box-shadow 0.2s;
+}
+.card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
+
+.answer-box {
+  background: #F0F9FA;
+  border-left: 4px solid #0B5563;
+  border-radius: 0 8px 8px 0;
+  padding: 1.25rem 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.definition-box {
+  background: white;
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  margin: 1rem 0;
+}
+
+.eyebrow {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #F26522;
+}
+
+.section-pad {
+  padding-top: 3.5rem;
+  padding-bottom: 3.5rem;
+}
+
+.container-content {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1200px;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+/* Prose-like content areas */
+.prose-content h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  color: #0F172A;
+}
+.prose-content h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  color: #0F172A;
+}
+.prose-content p {
+  margin-bottom: 1rem;
+  color: #475569;
+}
+.prose-content ul {
+  list-style: disc;
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+.prose-content ul li {
+  margin-bottom: 0.5rem;
+  color: #475569;
+}
+.prose-content ol {
+  list-style: decimal;
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+.prose-content ol li {
+  margin-bottom: 0.5rem;
+  color: #475569;
+}
+.prose-content a {
+  color: #0B5563;
+  text-decoration: underline;
+}
+.prose-content a:hover { color: #094a57; }
+.prose-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+}
+.prose-content th, .prose-content td {
+  padding: 0.75rem 1rem;
+  border: 1px solid #E2E8F0;
+  text-align: left;
+}
+.prose-content th {
+  background: #F8FAFC;
+  font-weight: 600;
+  color: #0F172A;
+}
+
+/* Mobile sticky CTA bar */
+.mobile-cta-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  background: white;
+  border-top: 1px solid #E2E8F0;
+  padding: 0.75rem;
+  padding-bottom: calc(0.75rem + env(safe-area-inset-bottom));
+  display: flex;
+  gap: 0.75rem;
+}
+
+@media (min-width: 768px) {
+  .section-pad {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+  .container-content {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+  .mobile-cta-bar {
+    display: none;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-pad {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+  }
+  .container-content {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
