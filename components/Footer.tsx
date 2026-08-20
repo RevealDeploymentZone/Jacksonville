@@ -26,7 +26,7 @@ export default function Footer() {
           <div>
             <Link href="/" className="flex items-center mb-4">
               <Image
-                src="/logo.png"
+                src="/logo-jax.png"
                 alt="AL Air Duct Cleaning Jacksonville"
                 width={140}
                 height={56}

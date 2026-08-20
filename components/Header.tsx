@@ -38,7 +38,7 @@ export default function Header() {
           {/* Logo */}
           <Link href="/" className="flex items-center shrink-0">
             <Image
-              src="/logo.png"
+              src="/logo-jax.png"
               alt="AL Air Duct Cleaning Jacksonville"
               width={160}
               height={64}
