@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useRef } from "react";
-import { Send, CheckCircle, AlertCircle } from "lucide-react";
+import { useState } from "react";
+import { Send, CheckCircle } from "lucide-react";
 import { SERVICES } from "@/data/business";
 
 interface LeadFormProps {
@@ -17,11 +17,11 @@ export default function LeadForm({
   compact = false,
   defaultService = "",
 }: LeadFormProps) {
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errors, setErrors] = useState<Record<string, string>>({});
-  const honeypotRef = useRef<HTMLInputElement>(null);
 
-  function validate(data: FormData) {
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    const form = e.currentTarget;
+    const data = new FormData(form);
     const errs: Record<string, string> = {};
     const name = data.get("name") as string;
     const phone = data.get("phone") as string;
@@ -29,77 +29,14 @@ export default function LeadForm({
     if (!name || name.trim().length < 2) errs.name = "Please enter your full name.";
     if (!phone || !/^\+?[\d\s\-().]{7,}$/.test(phone.trim()))
       errs.phone = "Please enter a valid phone number.";
-    return errs;
-  }
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-
-    // Honeypot check
-    if (honeypotRef.current?.value) return;
-
-    const form = e.currentTarget;
-    const data = new FormData(form);
-    const errs = validate(data);
     if (Object.keys(errs).length > 0) {
+      e.preventDefault();
       setErrors(errs);
       return;
     }
-
-    setStatus("loading");
     setErrors({});
-
-    try {
-      const res = await fetch("https://formsubmit.co/ajax/info@alhomeservices.us", {
-        method: "POST",
-        headers: { "Content-Type": "application/json", "Accept": "application/json" },
-        body: JSON.stringify({
-          name: data.get("name"),
-          phone: data.get("phone"),
-          email: data.get("email") || "not provided",
-          service: data.get("service") || "Not specified",
-          zip: data.get("zip") || "Not specified",
-          message: data.get("message") || "",
-          _subject: "New Lead — AL Air Duct Cleaning Jacksonville",
-          _captcha: "false",
-        }),
-      });
-
-      const json = await res.json();
-      if (json.success === "true" || json.success === true) {
-        setStatus("success");
-        form.reset();
-        if (typeof window !== "undefined" && (window as any).gtag) {
-          (window as any).gtag("event", "generate_lead", {
-            event_category: "lead_form",
-            event_label: data.get("service") as string,
-          });
-        }
-      } else {
-        setStatus("error");
-      }
-    } catch {
-      setStatus("error");
-    }
-  }
-
-  if (status === "success") {
-    return (
-      <div className="card text-center py-10">
-        <CheckCircle
-          size={48}
-          strokeWidth={1.5}
-          className="mx-auto mb-4"
-          style={{ color: "#16A34A" }}
-        />
-        <h3 className="text-xl font-semibold mb-2" style={{ color: "#0F172A" }}>
-          Request received
-        </h3>
-        <p className="text-[#475569]">
-          We'll call you back within 1 hour. Thank you for reaching out.
-        </p>
-      </div>
-    );
+    // Valid — let the form POST natively to FormSubmit.co
   }
 
   return (
@@ -115,17 +52,18 @@ export default function LeadForm({
         </div>
       )}
 
-      <form onSubmit={handleSubmit} noValidate>
-        {/* Honeypot — hidden from real users */}
-        <input
-          ref={honeypotRef}
-          name="_gotcha"
-          type="text"
-          tabIndex={-1}
-          autoComplete="off"
-          style={{ position: "absolute", left: "-9999px", opacity: 0 }}
-          aria-hidden="true"
-        />
+      <form
+        action="https://formsubmit.co/info@alhomeservices.us"
+        method="POST"
+        onSubmit={handleSubmit}
+      >
+        {/* FormSubmit.co config */}
+        <input type="hidden" name="_subject" value="New Lead — AL Air Duct Cleaning Jacksonville" />
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="hidden" name="_template" value="table" />
+        <input type="hidden" name="_next" value="https://al-air-duct-jacksonville.vercel.app/thank-you" />
+        {/* Honeypot */}
+        <input name="_honey" type="text" style={{ display: "none" }} />
 
         <div className={`grid gap-4 ${compact ? "grid-cols-1" : "grid-cols-1 sm:grid-cols-2"}`}>
           {/* Full name */}
@@ -262,26 +200,9 @@ export default function LeadForm({
           </div>
         </div>
 
-        {status === "error" && (
-          <div className="mt-3 flex items-center gap-2 text-sm text-red-600">
-            <AlertCircle size={16} strokeWidth={1.5} />
-            Something went wrong. Please call us directly or try again.
-          </div>
-        )}
-
-        <button
-          type="submit"
-          disabled={status === "loading"}
-          className="btn-primary w-full mt-4"
-        >
-          {status === "loading" ? (
-            "Sending..."
-          ) : (
-            <>
-              <Send size={16} strokeWidth={1.5} />
-              Get my free estimate
-            </>
-          )}
+        <button type="submit" className="btn-primary w-full mt-4">
+          <Send size={16} strokeWidth={1.5} />
+          Get my free estimate
         </button>
         <p className="text-xs text-center mt-2" style={{ color: "#94a3b8" }}>
           No spam. No obligation. Calls returned within 1 hour.
