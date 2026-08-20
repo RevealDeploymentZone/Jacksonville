@@ -50,23 +50,25 @@ export default function LeadForm({
     setErrors({});
 
     try {
-      const res = await fetch("/api/lead", {
+      const res = await fetch("https://formsubmit.co/ajax/info@alhomeservices.us", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
         body: JSON.stringify({
           name: data.get("name"),
           phone: data.get("phone"),
-          email: data.get("email"),
-          service: data.get("service"),
-          zip: data.get("zip"),
-          message: data.get("message"),
+          email: data.get("email") || "not provided",
+          service: data.get("service") || "Not specified",
+          zip: data.get("zip") || "Not specified",
+          message: data.get("message") || "",
+          _subject: "New Lead — AL Air Duct Cleaning Jacksonville",
+          _captcha: "false",
         }),
       });
 
-      if (res.ok) {
+      const json = await res.json();
+      if (json.success === "true" || json.success === true) {
         setStatus("success");
         form.reset();
-        // Fire GA4 event if available
         if (typeof window !== "undefined" && (window as any).gtag) {
           (window as any).gtag("event", "generate_lead", {
             event_category: "lead_form",
