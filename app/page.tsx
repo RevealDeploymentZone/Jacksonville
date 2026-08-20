@@ -132,7 +132,7 @@ export default function HomePage() {
               >
                 Jacksonville air duct cleaning — from Riverside to the Beaches
               </h1>
-              <p className="text-lg text-blue-100 mb-6 leading-relaxed">
+              <p className="text-lg mb-6 leading-relaxed" style={{ color: "white" }}>
                 AL Air Duct Cleaning Jacksonville serves all of Duval, St. Johns, Clay and Nassau counties. Whether your home is a 1920s Craftsman in Avondale or a new build in Nocatee, we bring NADCA-standard equipment and trained technicians to your door — 24 hours a day, seven days a week.
               </p>
 
@@ -709,26 +709,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── 14. MAP EMBED ──────────────────────────────────────────── */}
-      <section style={{ background: "white" }}>
-        <div className="container-content py-8">
-          <h2 className="text-xl font-semibold mb-4" style={{ color: "#0F172A" }}>
-            Find us in Jacksonville, FL
-          </h2>
-          <div className="rounded-xl overflow-hidden border border-[#E2E8F0]" style={{ height: "340px" }}>
-            <iframe
-              src={`https://www.google.com/maps/embed/v1/search?key=&q=air+duct+cleaning+Jacksonville+FL&center=${BUSINESS.lat},${BUSINESS.lng}&zoom=11`}
-              width="100%"
-              height="340"
-              style={{ border: 0 }}
-              allowFullScreen={false}
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              title="AL Air Duct Cleaning Jacksonville service area map"
-            />
-          </div>
-        </div>
-      </section>
 
       {/* ── FAQ ──────────────────────────────────────────────────── */}
       <section className="section-pad" style={{ background: "#F8FAFC" }}>
@@ -763,7 +743,7 @@ export default function HomePage() {
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
             Schedule your Jacksonville air duct cleaning
           </h2>
-          <p className="text-lg text-blue-100 mb-8 max-w-xl mx-auto">
+          <p className="text-lg mb-8 max-w-xl mx-auto" style={{ color: "white" }}>
             Free estimate. No obligation. We cover all of Duval, St. Johns, Clay and Nassau counties — and we respond within the hour.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
